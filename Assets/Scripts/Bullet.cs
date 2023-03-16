@@ -21,8 +21,15 @@ public class Bullet : MonoBehaviour
         switch (bt)
         {
             case BulletType.Player:
-                transform.Translate(Vector2.up * 6f * Time.deltaTime);
+                transform.Translate(Vector2.up * 18f * Time.deltaTime);
                 break;
+        }
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.tag == "BulletWall")
+        {
+            Destroy(gameObject);
         }
     }
 }
