@@ -15,7 +15,7 @@ public class Player : MonoBehaviour
     private bool isTrigger_B;
 
     private float curD;
-    private float maxD = 0.1f;
+    private float maxD = 0.04f;
 
     private void Update()
     {
