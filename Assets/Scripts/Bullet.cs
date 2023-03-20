@@ -18,12 +18,7 @@ public class Bullet : MonoBehaviour
     }
     private void Update()
     {
-        switch (bt)
-        {
-            case BulletType.Player:
-                transform.Translate(Vector2.up * 18f * Time.deltaTime);
-                break;
-        }
+
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {

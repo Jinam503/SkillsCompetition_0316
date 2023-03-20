@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class Player : MonoBehaviour
 {
     public float speed;
     public int bulletLvl;
+    public float hp;
+    public Image hpImage;
 
     public GameObject bulletPrefab;
 
@@ -15,10 +17,12 @@ public class Player : MonoBehaviour
     private bool isTrigger_B;
 
     private float curD;
-    private float maxD = 0.04f;
+    private float maxD = 0.06f;
 
     private void Update()
     {
+        hpImage.fillAmount = hp / 10;
+        if (hp <= 0) Destroy(gameObject);
         Move();
         Fire();
         R();
@@ -30,12 +34,23 @@ public class Player : MonoBehaviour
         switch (bulletLvl)
         {
             case 1:
-                Instantiate(bulletPrefab, transform.position, transform.rotation);
+                GameObject bullet = Instantiate(bulletPrefab, transform.position, transform.rotation);
+                Rigidbody2D rigid = bullet.GetComponent<Rigidbody2D>();
+                rigid.AddForce(Vector2.up * 20, ForceMode2D.Impulse);
                 break;
             case 2:
                 break;
         }
         curD = 0f;
+    }
+
+    public void GetDamage(int damage)
+    {
+        hp -= damage;
+        if (hp <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
     private void R()
     {
