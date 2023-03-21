@@ -34,9 +34,7 @@ public class Player : MonoBehaviour
         switch (bulletLvl)
         {
             case 1:
-                GameObject bullet = Instantiate(bulletPrefab, transform.position, transform.rotation);
-                Rigidbody2D rigid = bullet.GetComponent<Rigidbody2D>();
-                rigid.AddForce(Vector2.up * 20, ForceMode2D.Impulse);
+                Instantiate(bulletPrefab, transform.position, transform.rotation);
                 break;
             case 2:
                 break;
@@ -68,7 +66,13 @@ public class Player : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.tag == "PlayerWall")
+        if (collision.gameObject.tag == "EnemyBullet")
+        {
+            Bullet bullet = collision.gameObject.GetComponent<Bullet>();
+            GetDamage(bullet.damage);
+            Destroy(collision.gameObject);
+        }
+        if (collision.gameObject.tag == "PlayerWall")
         {
             switch (collision.gameObject.name)
             {
