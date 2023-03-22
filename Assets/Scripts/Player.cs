@@ -47,6 +47,8 @@ public class Player : MonoBehaviour
         hp -= damage;
         if (hp <= 0)
         {
+            GameObject[] g = GameObject.FindGameObjectsWithTag("Enemy");
+            foreach (GameObject t in g) t.GetComponent<Enemy>().StopAllCoroutines();
             Destroy(gameObject);
         }
     }

@@ -11,6 +11,7 @@ public class SpawnEnemy : MonoBehaviour
     {
         StartCoroutine(SpawnS());
         StartCoroutine(SpawnM());
+        StartCoroutine(SpawnM2());
     }
 
     IEnumerator SpawnS()
@@ -24,6 +25,13 @@ public class SpawnEnemy : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
         StartCoroutine(SpawnM_());
+    }
+    IEnumerator SpawnM2()
+    {
+        yield return new WaitForSeconds(Random.Range(3f,6f));
+        Vector2 v = new Vector2(Random.Range(-1.5f, 1.5f), 7);
+        Instantiate(enemies[2], v, enemies[2].transform.rotation);
+        StartCoroutine(SpawnM2());
     }
     IEnumerator SpawnM_()
     {

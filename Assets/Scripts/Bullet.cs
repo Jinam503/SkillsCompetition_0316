@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    public enum BulletType { Player , EnemyA};
+    public enum BulletType { Player , EnemyA, EnemyB};
     public BulletType bt;
     public int damage;
     private void Awake()
@@ -15,6 +15,9 @@ public class Bullet : MonoBehaviour
                 damage = 1;
                 break;
             case BulletType.EnemyA:
+                damage = 2;
+                break;
+            case BulletType.EnemyB:
                 damage = 2;
                 break;
         }
@@ -28,6 +31,9 @@ public class Bullet : MonoBehaviour
                 break;
             case BulletType.EnemyA:
                 transform.Translate(Vector2.up * 5 * Time.deltaTime);
+                break;
+            case BulletType.EnemyB:
+                transform.Translate(Vector2.down * 5 * Time.deltaTime);
                 break;
         }
     }
