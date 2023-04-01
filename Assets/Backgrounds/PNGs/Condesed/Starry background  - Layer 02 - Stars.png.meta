@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 1d9255c2f084ca844b79b622b306b21b
+guid: 0ca3946b2ca51714cb9c3237814ac896
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -70,7 +70,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 2
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -105,13 +105,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Kla'ed - Torpedo Ship - Destruction_0
+      name: Starry background  - Layer 02 - Stars_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 64
-        height: 64
+        width: 640
+        height: 360
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -119,20 +119,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7f29aa4866c40364aabfc2294bc1c565
-      internalID: -1351277197
+      spriteID: dffe0fa569cbb4948b39e8fc01944c78
+      internalID: -397877777
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Kla'ed - Torpedo Ship - Destruction_1
+      name: Starry background  - Layer 02 - Stars_1
       rect:
         serializedVersion: 2
-        x: 64
+        x: 640
         y: 0
-        width: 64
-        height: 64
+        width: 640
+        height: 360
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -140,20 +140,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 26e7181df9ac04e49a5cee6318304229
-      internalID: -559430167
+      spriteID: 68277c7a30b32f048904133d1a3df768
+      internalID: -1640814180
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Kla'ed - Torpedo Ship - Destruction_2
+      name: Starry background  - Layer 02 - Stars_2
       rect:
         serializedVersion: 2
-        x: 128
+        x: 1280
         y: 0
-        width: 64
-        height: 64
+        width: 640
+        height: 360
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -161,20 +161,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bbaf87c8b9ac0c14b82c6adb26c4b4e9
-      internalID: 220626161
+      spriteID: 503e455e7982b5247b78b0fee53ab2fe
+      internalID: 813133323
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Kla'ed - Torpedo Ship - Destruction_3
+      name: Starry background  - Layer 02 - Stars_3
       rect:
         serializedVersion: 2
-        x: 192
+        x: 1920
         y: 0
-        width: 64
-        height: 64
+        width: 640
+        height: 360
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -182,20 +182,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1d23faa3136b6814fb3a6eb2c3157fa2
-      internalID: 1348759323
+      spriteID: d1ad2e0aeb446174cbd6bc5c9ecbab52
+      internalID: -1882695918
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Kla'ed - Torpedo Ship - Destruction_4
+      name: Starry background  - Layer 02 - Stars_4
       rect:
         serializedVersion: 2
-        x: 256
+        x: 2560
         y: 0
-        width: 64
-        height: 64
+        width: 640
+        height: 360
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -203,20 +203,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6ab72a340ff3c9f4cb37fcc1b8fcb88f
-      internalID: 1697591545
+      spriteID: 517f25749e12f664da68f3d91e44d9a5
+      internalID: 735301200
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Kla'ed - Torpedo Ship - Destruction_5
+      name: Starry background  - Layer 02 - Stars_5
       rect:
         serializedVersion: 2
-        x: 320
+        x: 3200
         y: 0
-        width: 64
-        height: 64
+        width: 640
+        height: 360
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -224,20 +224,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9316a3635aa69014e88946e8bea7c904
-      internalID: -1151859171
+      spriteID: 5cf3664fdb32f6f4685a4194fa86ea76
+      internalID: -981047379
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Kla'ed - Torpedo Ship - Destruction_6
+      name: Starry background  - Layer 02 - Stars_6
       rect:
         serializedVersion: 2
-        x: 384
+        x: 3840
         y: 0
-        width: 64
-        height: 64
+        width: 640
+        height: 360
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -245,20 +245,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5a40f4341855e4242a660281fb36a9c2
-      internalID: 345168357
+      spriteID: 6e360fd8b0fcc774484fbc3b66c405fc
+      internalID: -150578233
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Kla'ed - Torpedo Ship - Destruction_7
+      name: Starry background  - Layer 02 - Stars_7
       rect:
         serializedVersion: 2
-        x: 448
+        x: 4480
         y: 0
-        width: 64
-        height: 64
+        width: 640
+        height: 360
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -266,20 +266,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 52fc03a71021acd4da41b4a68a97eb27
-      internalID: 189605057
+      spriteID: 4d4e307a5ee4fb7498d01612e559499e
+      internalID: -1539712246
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Kla'ed - Torpedo Ship - Destruction_8
+      name: Starry background  - Layer 02 - Stars_8
       rect:
         serializedVersion: 2
-        x: 512
+        x: 5120
         y: 0
-        width: 64
-        height: 64
+        width: 640
+        height: 360
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -287,8 +287,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3355833414cb2fd48975452aefda5498
-      internalID: 74288368
+      spriteID: 429644f4476a6ea488b46c319beecdb2
+      internalID: -734998735
       vertices: []
       indices: 
       edges: []
@@ -304,15 +304,15 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Kla'ed - Torpedo Ship - Destruction_0: -1351277197
-      Kla'ed - Torpedo Ship - Destruction_1: -559430167
-      Kla'ed - Torpedo Ship - Destruction_2: 220626161
-      Kla'ed - Torpedo Ship - Destruction_3: 1348759323
-      Kla'ed - Torpedo Ship - Destruction_4: 1697591545
-      Kla'ed - Torpedo Ship - Destruction_5: -1151859171
-      Kla'ed - Torpedo Ship - Destruction_6: 345168357
-      Kla'ed - Torpedo Ship - Destruction_7: 189605057
-      Kla'ed - Torpedo Ship - Destruction_8: 74288368
+      Starry background  - Layer 02 - Stars_0: -397877777
+      Starry background  - Layer 02 - Stars_1: -1640814180
+      Starry background  - Layer 02 - Stars_2: 813133323
+      Starry background  - Layer 02 - Stars_3: -1882695918
+      Starry background  - Layer 02 - Stars_4: 735301200
+      Starry background  - Layer 02 - Stars_5: -981047379
+      Starry background  - Layer 02 - Stars_6: -150578233
+      Starry background  - Layer 02 - Stars_7: -1539712246
+      Starry background  - Layer 02 - Stars_8: -734998735
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
