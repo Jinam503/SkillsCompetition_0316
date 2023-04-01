@@ -9,14 +9,16 @@ TagManager:
   - BulletWall
   - Enemy
   - EnemyBullet
+  - DestroyWall
+  - Barrior
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Barrior
   - Water
   - UI
-  - 
+  - Enemy
   - 
   - 
   - 

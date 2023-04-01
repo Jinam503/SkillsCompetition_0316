@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : Damageable
 {
     private float h;
     private float v;
@@ -15,11 +15,17 @@ public class Player : MonoBehaviour
     public float maxShootDelay;
     public float curShootDelay = 0f;
 
+    public int BulletLvl;
+
     private bool touchL;
     private bool touchR;
     private bool touchT;
     private bool touchB;
 
+    private void Start()
+    {
+        hp = 3;
+    }
     private void Update()
     {
         Inputs();
@@ -32,7 +38,19 @@ public class Player : MonoBehaviour
         if (curShootDelay < maxShootDelay) return;
         curShootDelay = 0f;
         Quaternion rot = Quaternion.Euler(0, 0, 90);
-        Instantiate(playerBullet_1, transform.position, rot);
+        switch (BulletLvl)
+        {
+            case 1:
+                Instantiate(playerBullet_1, transform.position, rot);
+                break;
+            case 2:
+                Instantiate(playerBullet_3, transform.position, rot);
+                break;
+            case 3:
+                Instantiate(playerBullet_2, transform.position, rot);
+                break;
+        }
+        
     }
     private void ShootDelay()
     {
