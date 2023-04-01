@@ -22,6 +22,19 @@ public class Player : Damageable
     private bool touchT;
     private bool touchB;
 
+    public int life;
+
+    private bool canDamage;
+    private SpriteRenderer sr;
+
+    public GameManager gameManager;
+    private void Start()
+    {
+        canDamage = true;
+        sr = GetComponent<SpriteRenderer>();
+        life = 3;
+        gameManager.UpdateLife(life);
+    }
     private void Update()
     {
         Inputs();
@@ -70,6 +83,12 @@ public class Player : Damageable
         v = Input.GetAxisRaw("Vertical");
         if ((v == 1 && touchT) || (v == -1 && touchB)) v = 0;
     }
+    private void Respawn()
+    {
+        sr.color = new Color(1, 1, 1, 1);
+        canDamage = true;
+    }
+    
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "PlayerWall")
@@ -90,6 +109,20 @@ public class Player : Damageable
                     break;
 
             }
+        }
+        else if(collision.gameObject.tag == "EnemyBullet" || collision.gameObject.tag == "Enemy")
+        {
+            Destroy(collision.gameObject);
+            if (!canDamage) return;
+            life--;
+            if(life == 0)
+            {
+                gameObject.SetActive(false);
+            }
+            gameManager.UpdateLife(life);
+            sr.color = new Color(1, 1, 1, 0.5f);
+            canDamage = false;
+            Invoke("Respawn", 2f);
         }
     }
     private void OnTriggerExit2D(Collider2D collision)

@@ -6,7 +6,7 @@ public class Battlecruiser : Enemy
 {
     private Animator anim;
     public GameObject bullet2;
-    public GameObject[] spawnPoints;
+    public GameObject targetPos;
 
     public override void Start()
     {
@@ -25,11 +25,11 @@ public class Battlecruiser : Enemy
     {
         yield return new WaitForSeconds(3f);
 
-        anim.SetTrigger("Fire");
+        //anim.SetTrigger("Fire");
         for (int i = 0; i < 6; i++)
         {
             yield return new WaitForSeconds(0.2f);
-            GameObject g = Instantiate(bullet2, spawnPoints[i].transform.position, transform.rotation);
+            GameObject g = Instantiate(bullet2, transform.position, transform.rotation);
             Rigidbody2D r = g.GetComponent<Rigidbody2D>();
             r.AddForce(Vector2.down * 5f, ForceMode2D.Impulse);
         }
@@ -47,5 +47,6 @@ public class Battlecruiser : Enemy
     public void Destroy()
     {
         Destroy(gameObject);
+        
     }
 }
