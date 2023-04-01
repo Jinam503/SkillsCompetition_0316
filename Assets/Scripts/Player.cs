@@ -1,116 +1,96 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+
 public class Player : MonoBehaviour
 {
-    public float speed;
-    public int bulletLvl;
-    public float hp;
-    public Image hpImage;
+    private float h;
+    private float v;
+    public float moveSpeed;
 
-    public GameObject bulletPrefab;
+    public GameObject playerBullet_1;
+    public GameObject playerBullet_2;
+    public GameObject playerBullet_3;
 
-    private bool isTrigger_L;
-    private bool isTrigger_R;
-    private bool isTrigger_T;
-    private bool isTrigger_B;
+    public float maxShootDelay;
+    public float curShootDelay = 0f;
 
-    private float curD;
-    private float maxD = 0.06f;
+    private bool touchL;
+    private bool touchR;
+    private bool touchT;
+    private bool touchB;
 
     private void Update()
     {
-        hpImage.fillAmount = hp / 10;
-        if (hp <= 0) Destroy(gameObject);
+        Inputs();
         Move();
         Fire();
-        R();
     }
-
     private void Fire()
     {
-        if (curD < maxD) return;
-        switch (bulletLvl)
-        {
-            case 1:
-                Instantiate(bulletPrefab, transform.position, transform.rotation);
-                break;
-            case 2:
-                break;
-        }
-        curD = 0f;
+        ShootDelay();
+        if (curShootDelay < maxShootDelay) return;
+        curShootDelay = 0f;
+        Quaternion rot = Quaternion.Euler(0, 0, 90);
+        Instantiate(playerBullet_1, transform.position, rot);
     }
-
-    public void GetDamage(int damage)
+    private void ShootDelay()
     {
-        hp -= damage;
-        if (hp <= 0)
-        {
-            GameObject[] g = GameObject.FindGameObjectsWithTag("Enemy");
-            foreach (GameObject t in g) t.GetComponent<Enemy>().StopAllCoroutines();
-            Destroy(gameObject);
-        }
-    }
-    private void R()
-    {
-        curD += Time.deltaTime;
+        curShootDelay += Time.deltaTime;
     }
     private void Move()
     {
-        float v = Input.GetAxisRaw("Vertical");
-        if ((isTrigger_T && v == 1) || (isTrigger_B && v == -1)) v = 0;
-        float h = Input.GetAxisRaw("Horizontal");
-        if ((isTrigger_R && h == 1) || (isTrigger_L && h == -1)) h = 0;
-        Vector2 curPos = transform.position;
-        Vector2 nextPos = new Vector2(h, v) * speed * Time.deltaTime;
-        transform.position = curPos + nextPos;
+        Vector3 nextpos = new Vector3(h, v, 0);
+        transform.position = transform.position + nextpos * moveSpeed * Time.deltaTime;
+    }
+    private void Inputs()
+    {
+        h = Input.GetAxisRaw("Horizontal");
+        if ((h == 1 && touchR) || (h == -1 && touchL)) h = 0;
+        v = Input.GetAxisRaw("Vertical");
+        if ((v == 1 && touchT) || (v == -1 && touchB)) v = 0;
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "EnemyBullet")
-        {
-            Bullet bullet = collision.gameObject.GetComponent<Bullet>();
-            GetDamage(bullet.damage);
-            Destroy(collision.gameObject);
-        }
         if (collision.gameObject.tag == "PlayerWall")
         {
             switch (collision.gameObject.name)
             {
                 case "L":
-                    isTrigger_L = true;
+                    touchL = true;
                     break;
                 case "R":
-                    isTrigger_R = true;
+                    touchR = true;
                     break;
                 case "T":
-                    isTrigger_T = true;
+                    touchT = true;
                     break;
                 case "B":
-                    isTrigger_B = true;
+                    touchB = true;
                     break;
+
             }
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.tag == "PlayerWall")
+        if (collision.gameObject.tag == "PlayerWall")
         {
-            switch (collision.name)
+            switch (collision.gameObject.name)
             {
                 case "L":
-                    isTrigger_L = false;
+                    touchL = false;
                     break;
                 case "R":
-                    isTrigger_R = false;
+                    touchR = false;
                     break;
                 case "T":
-                    isTrigger_T = false;
+                    touchT = false;
                     break;
                 case "B":
-                    isTrigger_B = false;
+                    touchB = false;
                     break;
+
             }
         }
     }
