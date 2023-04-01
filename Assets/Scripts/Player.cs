@@ -22,10 +22,6 @@ public class Player : Damageable
     private bool touchT;
     private bool touchB;
 
-    private void Start()
-    {
-        hp = 3;
-    }
     private void Update()
     {
         Inputs();
@@ -41,13 +37,19 @@ public class Player : Damageable
         switch (BulletLvl)
         {
             case 1:
-                Instantiate(playerBullet_1, transform.position, rot);
+                GameObject b1 = Instantiate(playerBullet_1, transform.position, rot);
+                Rigidbody2D r1 = b1.GetComponent<Rigidbody2D>();
+                r1.AddForce(Vector2.up * 20f, ForceMode2D.Impulse);
                 break;
             case 2:
-                Instantiate(playerBullet_3, transform.position, rot);
+                GameObject b2 = Instantiate(playerBullet_2, transform.position, rot);
+                Rigidbody2D r2 = b2.GetComponent<Rigidbody2D>();
+                r2.AddForce(Vector2.up * 20f, ForceMode2D.Impulse);
                 break;
             case 3:
-                Instantiate(playerBullet_2, transform.position, rot);
+                GameObject b3 = Instantiate(playerBullet_3, transform.position, rot);
+                Rigidbody2D r3 = b3.GetComponent<Rigidbody2D>();
+                r3.AddForce(Vector2.up * 20f, ForceMode2D.Impulse);
                 break;
         }
         

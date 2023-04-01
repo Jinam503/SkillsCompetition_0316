@@ -4,21 +4,29 @@ using UnityEngine;
 
 public class Bomber : Enemy
 {
+    private Animator anim;
+    public override void Start()
+    {
+        base.Start();
+        anim = GetComponent<Animator>();
+    }
     private void Update()
     {
         if(hp > 0)
         {
-            transform.Translate(Vector2.up * 3f * Time.deltaTime);
+            transform.Translate(Vector2.up * 1f * Time.deltaTime);
         }
     }
     public override void OnHit(int damage)
     {
-        hp -= damage;
+        base.OnHit(damage);
         if(hp < 0)
         {
-            transform.GetChild(1).gameObject.SetActive(false);
-            transform.GetChild(2).gameObject.SetActive(true);
+            anim.SetTrigger("Destroy");
         }
-        
+    }
+    public void Destroy()
+    {
+        Destroy(gameObject);
     }
 }
