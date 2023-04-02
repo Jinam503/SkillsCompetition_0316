@@ -11,6 +11,7 @@ TagManager:
   - EnemyBullet
   - DestroyWall
   - Barrior
+  - Item
   layers:
   - Default
   - TransparentFX

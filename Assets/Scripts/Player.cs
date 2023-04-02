@@ -103,12 +103,7 @@ public class Player : Damageable
         sr.color = new Color(1, 1, 1, 1);
         canDamage = true;
     }
-    IEnumerator Return()
-    {
-        yield return new WaitForSeconds(3f);
-        canDamage = true;
-        transform.GetChild(0).gameObject.SetActive(false);
-    }
+   
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "PlayerWall")
@@ -149,6 +144,8 @@ public class Player : Damageable
         else if(collision.gameObject.tag == "Item")
         {
             Item item = collision.gameObject.GetComponent<Item>();
+            AudioSource a = collision.gameObject.GetComponent<AudioSource>();
+            a.Play();
             switch (item.iT)
             {
                 case Item.ItemType.fix:
@@ -159,8 +156,9 @@ public class Player : Damageable
                         life = 3;
                         
                     }
+                    StartCoroutine(DestroyItem(a.clip, collision.gameObject));
                     gameManager.UpdateLife(life);
-                    Destroy(collision.gameObject);
+                    
                     break;
                 case Item.ItemType.fuel:
                     score += 100;
@@ -169,30 +167,41 @@ public class Player : Damageable
                     {
                         fuel = 100f;
                     }
-                    Destroy(collision.gameObject);
+                    StartCoroutine(DestroyItem(a.clip, collision.gameObject));
                     break;
                 case Item.ItemType.upgrade:
                     score += 100;
                     BulletLvl++;
                     if (BulletLvl > 3) BulletLvl = 3;
-                    Destroy(collision.gameObject);
+                    StartCoroutine(DestroyItem(a.clip, collision.gameObject));
                     break;
                 case Item.ItemType.coin:
                     score += 1000;
-                    Destroy(collision.gameObject);
+                    StartCoroutine(DestroyItem(a.clip, collision.gameObject));
                     break;
                 case Item.ItemType.barrior:
                     
                     score += 100;
                     transform.GetChild(0).gameObject.SetActive(true);
                     canDamage = false;
-                    Destroy(collision.gameObject);
-                    StopCoroutine(Return());
-                    StartCoroutine(Return());
+                    StartCoroutine(DestroyItem(a.clip, collision.gameObject));
+                    StopCoroutine("Return");
+                    StartCoroutine("Return");
                     break;
-
             }
+            
         }
+    }
+    IEnumerator DestroyItem(AudioClip audio, GameObject g)
+    {
+        yield return new WaitForSeconds(audio.length);
+        Destroy(g);
+    }
+    IEnumerator Return()
+    {
+        yield return new WaitForSeconds(4f);
+        transform.GetChild(0).gameObject.SetActive(false);
+        canDamage = true;
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {

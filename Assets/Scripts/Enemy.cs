@@ -54,7 +54,6 @@ public class Enemy : MonoBehaviour
             rigid.AddForce(Vector2.down * 2f, ForceMode2D.Impulse);
         }
         itemSpawn = Random.Range(0, 20);
-        itemSpawn = 10;
         if (itemSpawn < 3)
         {
             GameObject up = Resources.Load<GameObject>("Item/powerUp");
