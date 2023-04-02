@@ -14,8 +14,6 @@ public class Enemy : MonoBehaviour
     protected Rigidbody2D rigid;
     protected new Collider2D collider;
 
-    
-
     public GameObject player;
     public virtual void Start()
     {

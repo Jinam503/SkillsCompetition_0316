@@ -10,12 +10,19 @@ public class Bullet : MonoBehaviour
     public int damage;
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        switch (collision.gameObject.tag)
+        if (bt == BulletType.Player_1 || bt == BulletType.Player_2 || bt == BulletType.Player_3)
         {
-            case "PlayerWall":
+            if (collision.gameObject.tag == "PlayerWall")
+            {
                 Destroy(gameObject);
-                break;
+            }
         }
+        else 
+        { 
+            if (collision.gameObject.tag == "DestroyWall") 
+                Destroy(gameObject);
+        }
+            
         
     }
 }

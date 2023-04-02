@@ -39,7 +39,7 @@ public class Player : Damageable
         sr = GetComponent<SpriteRenderer>();
         life = 3;
         fuel = 100;
-        score = 0;
+        score = 25001;
         gameManager.UpdateLife(life);
     }
     private void Update()
@@ -47,7 +47,7 @@ public class Player : Damageable
         Inputs();
         Move();
         Fire();
-        fuel -= Time.deltaTime * 3;
+        //fuel -= Time.deltaTime * 3;
         fuelImage.fillAmount = (float)fuel / 100f;
         if(fuel < 0f)
         {
@@ -207,9 +207,8 @@ public class Player : Damageable
     {
         if(collision.gameObject.tag == "Enemy")
         {
-            if (!canDamage) return;
             Destroy(collision.gameObject);
-            
+            if (!canDamage) return;
             life--;
             if (life == 0)
             {
