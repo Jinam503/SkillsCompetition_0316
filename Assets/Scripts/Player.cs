@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : Damageable
 {
@@ -23,6 +24,10 @@ public class Player : Damageable
     private bool touchB;
 
     public int life;
+    public int score;
+    public float fuel;
+
+    public Image fuelImage;
 
     private bool canDamage;
     private SpriteRenderer sr;
@@ -33,6 +38,8 @@ public class Player : Damageable
         canDamage = true;
         sr = GetComponent<SpriteRenderer>();
         life = 3;
+        fuel = 100;
+        score = 0;
         gameManager.UpdateLife(life);
     }
     private void Update()
@@ -40,6 +47,14 @@ public class Player : Damageable
         Inputs();
         Move();
         Fire();
+        fuel -= Time.deltaTime * 3;
+        fuelImage.fillAmount = (float)fuel / 100f;
+        if(fuel < 0f)
+        {
+            life = 0;
+            gameManager.UpdateLife(life);
+            gameObject.SetActive(false);
+        }
     }
     private void Fire()
     {
@@ -88,7 +103,12 @@ public class Player : Damageable
         sr.color = new Color(1, 1, 1, 1);
         canDamage = true;
     }
-    
+    IEnumerator Return()
+    {
+        yield return new WaitForSeconds(3f);
+        canDamage = true;
+        transform.GetChild(0).gameObject.SetActive(false);
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "PlayerWall")
@@ -110,12 +130,79 @@ public class Player : Damageable
 
             }
         }
-        else if(collision.gameObject.tag == "EnemyBullet" || collision.gameObject.tag == "Enemy")
+        else if(collision.gameObject.tag == "EnemyBullet")
         {
+            
+            
             Destroy(collision.gameObject);
             if (!canDamage) return;
             life--;
             if(life == 0)
+            {
+                gameObject.SetActive(false);
+            }
+            gameManager.UpdateLife(life);
+            sr.color = new Color(1, 1, 1, 0.5f);
+            canDamage = false;
+            Invoke("Respawn", 2f);
+        }
+        else if(collision.gameObject.tag == "Item")
+        {
+            Item item = collision.gameObject.GetComponent<Item>();
+            switch (item.iT)
+            {
+                case Item.ItemType.fix:
+                    score += 100;
+                    life++;
+                    if(life > 3)
+                    {
+                        life = 3;
+                        
+                    }
+                    gameManager.UpdateLife(life);
+                    Destroy(collision.gameObject);
+                    break;
+                case Item.ItemType.fuel:
+                    score += 100;
+                    fuel += 40f;
+                    if (fuel > 100f)
+                    {
+                        fuel = 100f;
+                    }
+                    Destroy(collision.gameObject);
+                    break;
+                case Item.ItemType.upgrade:
+                    score += 100;
+                    BulletLvl++;
+                    if (BulletLvl > 3) BulletLvl = 3;
+                    Destroy(collision.gameObject);
+                    break;
+                case Item.ItemType.coin:
+                    score += 1000;
+                    Destroy(collision.gameObject);
+                    break;
+                case Item.ItemType.barrior:
+                    
+                    score += 100;
+                    transform.GetChild(0).gameObject.SetActive(true);
+                    canDamage = false;
+                    Destroy(collision.gameObject);
+                    StopCoroutine(Return());
+                    StartCoroutine(Return());
+                    break;
+
+            }
+        }
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.tag == "Enemy")
+        {
+            if (!canDamage) return;
+            Destroy(collision.gameObject);
+            
+            life--;
+            if (life == 0)
             {
                 gameObject.SetActive(false);
             }

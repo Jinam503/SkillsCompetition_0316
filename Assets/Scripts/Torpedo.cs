@@ -2,51 +2,47 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Battlecruiser : Enemy
+public class Torpedo : Enemy
 {
     private Animator anim;
     public GameObject bullet2;
-    public GameObject targetPos;
+    public GameObject[] spawnPoints;
 
     public override void Start()
     {
+        collider = GetComponent<BoxCollider2D>();
         base.Start();
         anim = GetComponent<Animator>();
         StartCoroutine(Fire());
     }
-    private void Update()
-    {
-        if (hp > 0)
-        {
-            transform.Translate(Vector2.up * 0.5f * Time.deltaTime);
-        }
-    }
     IEnumerator Fire()
     {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(5f);
 
-        //anim.SetTrigger("Fire");
+        anim.SetTrigger("Fire");
         for (int i = 0; i < 6; i++)
         {
             yield return new WaitForSeconds(0.2f);
-            GameObject g = Instantiate(bullet2, transform.position, transform.rotation);
+            GameObject g = Instantiate(bullet2, spawnPoints[i].transform.position, transform.rotation);
             Rigidbody2D r = g.GetComponent<Rigidbody2D>();
             r.AddForce(Vector2.down * 5f, ForceMode2D.Impulse);
         }
-
+        
         StartCoroutine(Fire());
     }
     public override void OnHit(int damage)
     {
+        if (died) return;
         base.OnHit(damage);
         if (hp < 0)
         {
+            StopAllCoroutines();
+            rigid.velocity = Vector2.zero;
+        
+            collider.enabled = false;
+            died = true;
+            audio.Play();
             anim.SetTrigger("Destroy");
         }
-    }
-    public void Destroy()
-    {
-        Destroy(gameObject);
-        
     }
 }

@@ -10,16 +10,10 @@ public class Frigate : Enemy
 
     public override void Start()
     {
+        collider = GetComponent<BoxCollider2D>();
         base.Start();
         anim = GetComponent<Animator>();
         StartCoroutine(Fire());
-    }
-    private void Update()
-    {
-        if (hp > 0)
-        {
-            transform.Translate(Vector2.up * 1f * Time.deltaTime);
-        }
     }
     IEnumerator Fire()
     {
@@ -33,14 +27,15 @@ public class Frigate : Enemy
     }
     public override void OnHit(int damage)
     {
+        if (died) return;
         base.OnHit(damage);
         if (hp < 0)
         {
+            collider.enabled = false;
+            rigid.velocity = Vector2.zero;
+            died = true;
+            audio.Play();
             anim.SetTrigger("Destroy");
         }
-    }
-    public void Destroy()
-    {
-        Destroy(gameObject);
     }
 }

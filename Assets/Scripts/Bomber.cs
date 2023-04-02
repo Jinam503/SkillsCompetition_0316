@@ -7,26 +7,22 @@ public class Bomber : Enemy
     private Animator anim;
     public override void Start()
     {
+        collider = GetComponent<BoxCollider2D>();
         base.Start();
         anim = GetComponent<Animator>();
     }
-    private void Update()
-    {
-        if(hp > 0)
-        {
-            transform.Translate(Vector2.up * 3f * Time.deltaTime);
-        }
-    }
     public override void OnHit(int damage)
     {
+        if (died) return;
         base.OnHit(damage);
-        if(hp < 0)
+        if (hp < 0)
         {
+            collider.enabled = false;
+            rigid.velocity = Vector2.zero;
+            died = true;
+            audio.Play();
             anim.SetTrigger("Destroy");
         }
     }
-    public void Destroy()
-    {
-        Destroy(gameObject);
-    }
+    
 }

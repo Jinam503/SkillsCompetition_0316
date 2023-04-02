@@ -6,6 +6,10 @@ public class Barrior : MonoBehaviour
 {
     public int hp;
 
+    private void Update()
+    {
+        transform.position = transform.parent.position;
+    }
     public void OnHit(int damage)
     {
         hp -= damage;
