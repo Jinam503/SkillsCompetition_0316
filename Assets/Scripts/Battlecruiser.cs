@@ -46,7 +46,7 @@ public class Battlecruiser : Enemy
         
         }
         yield return new WaitForSeconds(3f);
-        for (int i = 0; i < 99; i++)
+        for (int i = 0; i < 49; i++)
         {
             yield return new WaitForSeconds(0.1f);
             GameObject g = Instantiate(bullet1, transform.position, transform.rotation);
@@ -102,6 +102,8 @@ public class Battlecruiser : Enemy
             died = true;
             audio.Play();
             anim.SetTrigger("Destroy");
+            GameManager.StartMBoss = false;
+            GameManager.ClearMBoss = true;
         }
     }
 }

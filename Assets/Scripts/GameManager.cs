@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    
     public GameObject[] enemyPrefab;
     public Transform[] spawnPoints;
 
@@ -15,22 +16,31 @@ public class GameManager : MonoBehaviour
     public GameObject GameOver;
     public Text scoreText;
     public GameObject player;
+    public Text[] scores;
+    public Text[] times;
 
-    private bool StartMBoss = false;
-    private bool StartLBoss = false;
+    public static bool StartMBoss;
+    public static bool StartLBoss;
+    public static bool ClearMBoss;
+    public static bool ClearLBoss;
 
     private void Start()
     {
-        //StartCoroutine("SpawnEnemy");
-        //StartCoroutine("SpawnEnemy_");
-        //StartCoroutine("SpawnEnemy__");
+        StartMBoss = false;
+        StartLBoss = false;
+        ClearMBoss =false;
+        ClearLBoss = false;
+        StartCoroutine("SpawnEnemy");
+        StartCoroutine("SpawnEnemy_");
+        StartCoroutine("SpawnEnemy__");
         isEnd = false;
     }
     private void Update()
     {
+        Debug.Log(StartMBoss);
         Player playerLogic = player.GetComponent<Player>();
         scoreText.text = string.Format("{0:n0}", playerLogic.score);
-        if (playerLogic.score > 25000 && !StartMBoss) {
+        if (playerLogic.score > 25000 && !StartMBoss && !ClearMBoss) {
             StartMBoss = true;
             GameObject enemy = Instantiate(enemyPrefab[5], spawnPoints[2].position, Quaternion.Euler(0, 0, 180));
             Rigidbody2D rigid = enemy.GetComponent<Rigidbody2D>();
@@ -39,7 +49,7 @@ public class GameManager : MonoBehaviour
             rigid.velocity = new Vector2(0, enemyLogic.speed * -1);
             StartCoroutine(StopMove(rigid));
         }
-        else if (playerLogic.score > 50000 && !StartLBoss)
+        else if (playerLogic.score > 50000 && !StartLBoss && !ClearLBoss)
         {
             StartLBoss = true;
             GameObject enemy = Instantiate(enemyPrefab[6], spawnPoints[2].position, Quaternion.Euler(0, 0, 180));
@@ -86,9 +96,10 @@ public class GameManager : MonoBehaviour
     }
     IEnumerator SpawnEnemy__()
     {
+        yield return new WaitForSeconds(Random.Range(3f, 5f));
         if (!StartMBoss && !StartLBoss)
         {
-            yield return new WaitForSeconds(Random.Range(3f, 5f));
+            
             int spawnPoint = Random.Range(5, 11);
             int enemytype = Random.Range(2, 4);
             GameObject enemy;
@@ -117,6 +128,19 @@ public class GameManager : MonoBehaviour
         if(life == 0)
         {
             isEnd = true;
+            Player p = player.GetComponent<Player>();
+            ScoreInfo info = new ScoreInfo();
+            info.time = p.playTime;
+            info.name = "player";
+            info.score = p.score;
+            Ranking.list.Add(info);
+            Ranking.SortList();
+            List<ScoreInfo> l = Ranking.list;
+            for(int i = 0; i < l.Count; i++)
+            {
+                scores[i].text = l[i].score.ToString();
+                times[i].text = l[i].time.ToString();
+            }
             GameOver.gameObject.SetActive(true);
         }
         for(int i = 0; i < 3; i++)
@@ -131,5 +155,9 @@ public class GameManager : MonoBehaviour
     public void Retry()
     {
         SceneManager.LoadScene("Stage 1");
+    }
+    public void Out()
+    {
+        SceneManager.LoadScene("PickStage");
     }
 }

@@ -33,17 +33,21 @@ public class Player : Damageable
     private SpriteRenderer sr;
 
     public GameManager gameManager;
+
+    public float playTime = 0f;
     private void Start()
     {
+        
         canDamage = true;
         sr = GetComponent<SpriteRenderer>();
         life = 3;
         fuel = 100;
-        score = 25001;
+        score = 0;
         gameManager.UpdateLife(life);
     }
     private void Update()
     {
+        playTime += Time.deltaTime;
         Inputs();
         Move();
         Fire();
@@ -78,6 +82,17 @@ public class Player : Damageable
                 GameObject b3 = Instantiate(playerBullet_3, transform.position, rot);
                 Rigidbody2D r3 = b3.GetComponent<Rigidbody2D>();
                 r3.AddForce(Vector2.up * 20f, ForceMode2D.Impulse);
+                break;
+            case 4:
+                GameObject b4 = Instantiate(playerBullet_1, transform.position+Vector3.right*0.35f + Vector3.down * 0.15f, rot);
+                Rigidbody2D r4 = b4.GetComponent<Rigidbody2D>();
+                r4.AddForce(Vector2.up * 20f, ForceMode2D.Impulse);
+                GameObject b5 = Instantiate(playerBullet_1, transform.position + Vector3.right * -0.35f + Vector3.down * 0.15f, rot);
+                Rigidbody2D r5 = b5.GetComponent<Rigidbody2D>();
+                r5.AddForce(Vector2.up * 20f, ForceMode2D.Impulse);
+                GameObject b6 = Instantiate(playerBullet_3, transform.position, rot);
+                Rigidbody2D r6 = b6.GetComponent<Rigidbody2D>();
+                r6.AddForce(Vector2.up * 20f, ForceMode2D.Impulse);
                 break;
         }
         

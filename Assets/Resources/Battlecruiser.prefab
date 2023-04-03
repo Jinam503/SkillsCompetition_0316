@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 9076036557929719653}
   - component: {fileID: 1536081569435497603}
   - component: {fileID: 2266570398192817543}
+  - component: {fileID: -8996030974192075932}
   m_Layer: 8
   m_Name: Battlecruiser
   m_TagString: Enemy
@@ -198,7 +199,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 1.2
   enemyScore: 5000
-  hp: 1000
+  hp: 500
   player: {fileID: 0}
   bullet1: {fileID: 3280164098636639643, guid: 61e25ef9ec02ee044aabfc66acfa11c9, type: 3}
   bullet2: {fileID: 6830954615499218027, guid: cf0163c76d2fff74fbc8692064980f63, type: 3}
@@ -249,3 +250,24 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.461865, y: 2.593831}
   m_EdgeRadius: 0
+--- !u!95 &-8996030974192075932
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9076036557929719656}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a3dda53ee0dd8bf4fa0c25690f9a9cfd, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
