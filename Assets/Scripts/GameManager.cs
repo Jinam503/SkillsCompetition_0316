@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     public GameObject GameOver;
     public Text scoreText;
     public GameObject player;
+    public GameObject meteorPrefab;
     public Text[] scores;
     public Text[] times;
 
@@ -33,6 +34,7 @@ public class GameManager : MonoBehaviour
         StartCoroutine("SpawnEnemy");
         StartCoroutine("SpawnEnemy_");
         StartCoroutine("SpawnEnemy__");
+        StartCoroutine("SpawnMeteor");
         isEnd = false;
     }
     private void Update()
@@ -121,6 +123,14 @@ public class GameManager : MonoBehaviour
             }
         }
         StartCoroutine(SpawnEnemy__());
+    }
+    IEnumerator SpawnMeteor()
+    {
+        yield return new WaitForSeconds(Random.Range(8f, 10f)); 
+        GameObject m = Instantiate(meteorPrefab, spawnPoints[2].transform.position, Quaternion.identity);
+        Meteor mL = m.GetComponent<Meteor>();
+        mL.player = player;
+        StartCoroutine("SpawnMeteor");
     }
 
     public void UpdateLife(int life)

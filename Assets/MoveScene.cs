@@ -11,4 +11,9 @@ public class MoveScene : MonoBehaviour
             SceneManager.LoadScene("PickStage");
         }
     }
+    
+    public void MoveToPickStage()
+    {
+        SceneManager.LoadScene("PickStage");
+    }
 }

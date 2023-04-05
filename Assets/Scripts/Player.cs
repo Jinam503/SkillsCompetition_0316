@@ -12,7 +12,7 @@ public class Player : Damageable
     public GameObject playerBullet_1;
     public GameObject playerBullet_2;
     public GameObject playerBullet_3;
-
+    public GameObject subBullet;
     public float maxShootDelay;
     public float curShootDelay = 0f;
 
@@ -25,6 +25,7 @@ public class Player : Damageable
 
     public int life;
     public int score;
+    private bool razorSkill;
     public float fuel;
 
     public Image fuelImage;
@@ -37,7 +38,7 @@ public class Player : Damageable
     public float playTime = 0f;
     private void Start()
     {
-        
+        razorSkill = false;
         canDamage = true;
         sr = GetComponent<SpriteRenderer>();
         life = 3;
@@ -45,13 +46,15 @@ public class Player : Damageable
         score = 0;
         gameManager.UpdateLife(life);
     }
+    
     private void Update()
     {
+        life = 3;
         playTime += Time.deltaTime;
         Inputs();
         Move();
         Fire();
-        //fuel -= Time.deltaTime * 3;
+        fuel -= Time.deltaTime * (razorSkill == true? 10:2);
         fuelImage.fillAmount = (float)fuel / 100f;
         if(fuel < 0f)
         {
@@ -59,6 +62,10 @@ public class Player : Damageable
             gameManager.UpdateLife(life);
             gameObject.SetActive(false);
         }
+    }
+    public void BreakMeteor()
+    {
+
     }
     private void Fire()
     {
@@ -95,6 +102,17 @@ public class Player : Damageable
                 r6.AddForce(Vector2.up * 20f, ForceMode2D.Impulse);
                 break;
         }
+        if (razorSkill)
+        {
+            GameObject b4 = Instantiate(subBullet, transform.position + Vector3.right * 0.35f + Vector3.down * 0.23f, rot);
+            Rigidbody2D r4 = b4.GetComponent<Rigidbody2D>();
+            b4.GetComponent<Bullet>().damage = BulletLvl;
+            r4.AddForce(Vector2.up * 20f + Vector2.left *-5f, ForceMode2D.Impulse);
+            GameObject b5 = Instantiate(subBullet, transform.position + Vector3.right * -0.35f + Vector3.down * 0.23f, rot);
+            Rigidbody2D r5 = b5.GetComponent<Rigidbody2D>();
+            b5.GetComponent<Bullet>().damage = BulletLvl;
+            r5.AddForce(Vector2.up * 20f + Vector2.right * -5f, ForceMode2D.Impulse);
+        }
         
     }
     private void ShootDelay()
@@ -112,6 +130,10 @@ public class Player : Damageable
         if ((h == 1 && touchR) || (h == -1 && touchL)) h = 0;
         v = Input.GetAxisRaw("Vertical");
         if ((v == 1 && touchT) || (v == -1 && touchB)) v = 0;
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            razorSkill = !razorSkill;
+        }
     }
     private void Respawn()
     {
@@ -206,6 +228,7 @@ public class Player : Damageable
             }
             
         }
+        
     }
     IEnumerator DestroyItem(AudioClip audio, GameObject g)
     {

@@ -12,6 +12,7 @@ TagManager:
   - DestroyWall
   - Barrior
   - Item
+  - meteor
   layers:
   - Default
   - TransparentFX
